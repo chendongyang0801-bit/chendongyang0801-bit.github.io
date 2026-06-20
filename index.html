@@ -10,14 +10,14 @@
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
             background: #fef3e0;
             overflow-x: hidden;
+            padding-bottom: 100px;
         }
 
-        /* ===== 左上角标题 ===== */
         .top-bar {
             position: fixed;
             top: 0; left: 0; z-index: 99;
-            padding: 16px 24px;
-            font-size: 18px;
+            padding: 20px 30px;
+            font-size: 22px;
             color: #d47a6b;
             font-weight: bold;
             background: rgba(255,255,255,0.8);
@@ -26,30 +26,33 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             letter-spacing: 2px;
         }
-        .top-icon { font-size: 20px; margin-right: 5px; }
+        .top-icon { font-size: 24px; margin-right: 5px; }
 
         .story {
             position: relative; z-index: 2;
-            padding-top: 70px; padding-bottom: 40px;
+            padding-top: 90px; padding-bottom: 40px;
         }
 
-        /* ===== 大标题区域 ===== */
-        .main-title { text-align: center; padding: 30px 20px 10px; }
+        .main-title { text-align: center; padding: 40px 20px 20px; }
         .main-title h1 {
-            font-size: 38px; color: #d47a6b;
+            font-size: 48px;
+            color: #d47a6b;
         }
         .main-title .sub {
-            font-size: 14px; color: #bbb;
-            letter-spacing: 3px; margin-top: 5px;
+            font-size: 18px;
+            color: #5a3e36;          /* 深棕色，比之前清晰很多 */
+            font-weight: bold;       /* 加粗 */
+            letter-spacing: 4px;
+            margin-top: 10px;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8); /* 轻微白边，提升可读性 */
         }
 
-        /* ===== 照片网格 ===== */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            max-width: 800px;
-            margin: 30px auto;
+            gap: 22px;
+            max-width: 900px;
+            margin: 40px auto;
             padding: 0 20px;
             align-items: start;
         }
@@ -57,30 +60,41 @@
         .photo-item img {
             width: 100%;
             height: auto;
-            border-radius: 14px;
+            border-radius: 16px;
             box-shadow: 0 8px 22px rgba(0,0,0,0.1);
             display: block;
             cursor: pointer;
-            /* 悬停动画 */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .photo-item img:hover {
-            transform: translateY(-6px);   /* 微微上浮 */
-            box-shadow: 0 16px 35px rgba(0,0,0,0.18);  /* 阴影加深 */
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(0,0,0,0.18);
         }
-        .photo-item .caption { margin-top: 6px; font-size: 13px; color: #888; }
-        .photo-item .location { font-size: 12px; color: #bbb; }
+        .photo-item .caption {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;             /* 注释也加深一点 */
+            line-height: 1.6;
+            font-weight: 500;        /* 稍微加粗 */
+        }
+        .photo-item .location {
+            font-size: 14px;
+            color: #888;
+        }
 
-        .bottom-note { text-align: center; padding: 40px 20px 30px; }
-        .bottom-note p { font-size: 16px; color: #d47a6b; letter-spacing: 2px; }
+        .bottom-note { text-align: center; padding: 50px 20px 40px; }
+        .bottom-note p {
+            font-size: 20px;
+            color: #d47a6b;
+            letter-spacing: 3px;
+        }
 
-        /* ===== 飘落爱心 ===== */
         canvas {
             position: fixed; top: 0; left: 0;
             z-index: 1; pointer-events: none;
         }
 
-        /* ===== 灯箱 ===== */
+        /* 灯箱 */
         .lightbox {
             display: none;
             position: fixed;
@@ -104,7 +118,7 @@
         .lightbox .close-btn {
             position: absolute;
             top: 20px; right: 30px;
-            font-size: 40px;
+            font-size: 45px;
             color: #fff;
             cursor: pointer;
             user-select: none;
@@ -116,17 +130,96 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* 手机适配 */
+        /* 音乐播放器 */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+                       transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 40px;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.6);
+            max-width: 500px;
+            width: 90%;
+        }
+        .music-player button {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #d47a6b;
+            transition: transform 0.2s;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .music-player button:hover {
+            transform: scale(1.2);
+        }
+        .music-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .music-info .song-title {
+            font-size: 14px;
+            color: #c05a4a;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .music-info .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 2px;
+            margin-top: 6px;
+            cursor: pointer;
+            position: relative;
+        }
+        .music-info .progress-fill {
+            height: 100%;
+            background: #d47a6b;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        .music-time {
+            font-size: 11px;
+            color: #999;
+            flex-shrink: 0;
+            min-width: 35px;
+            text-align: right;
+        }
+
         @media (max-width: 600px) {
-            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .top-bar { font-size: 15px; padding: 12px 18px; }
-            .main-title h1 { font-size: 28px; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .top-bar { font-size: 18px; padding: 14px 20px; }
+            .top-icon { font-size: 20px; }
+            .main-title h1 { font-size: 36px; }
+            .main-title .sub { font-size: 15px; }
+            .photo-item .caption { font-size: 14px; }
+            .photo-item .location { font-size: 12px; }
+            .bottom-note p { font-size: 18px; }
+            .music-player {
+                padding: 10px 18px;
+                gap: 10px;
+                border-radius: 30px;
+            }
+            .music-player button { font-size: 24px; }
+            .music-info .song-title { font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 左上角小窝 -->
     <div class="top-bar">
         <span class="top-icon">❤️</span>
         陈东洋和点点的小窝
@@ -137,17 +230,27 @@
     <!-- 灯箱 -->
     <div class="lightbox" id="lightbox">
         <span class="close-btn" id="closeLightbox">&times;</span>
-        < img src="" alt="" id="lightboxImg">
+        <img src="" alt="" id="lightboxImg">
+    </div>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player" id="musicPlayer">
+        <button id="playBtn">▶️</button>
+        <div class="music-info">
+            <div class="song-title">🎵 我们的歌</div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+        <span class="music-time" id="musicTime">00:00</span>
     </div>
 
     <div class="story">
-        <!-- 大标题 -->
         <div class="main-title">
             <h1>照片墙 ❤️</h1>
             <p class="sub">说白了，跟你在一起之后还特地为你搭了个网站</p >
         </div>
 
-        <!-- 照片网格 -->
         <div class="photo-grid">
             <!-- 照片1 -->
             <div class="photo-item">
@@ -161,16 +264,102 @@
                 <p class="caption">这张也是 个人感觉给你拍最好看的嘿嘿</p >
                 <p class="location">📍 桔子岛</p >
             </div>
+            <!-- 照片3 -->
+            <div class="photo-item">
+                <img src="photos/3.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">你拿个棒球棍要吓死我？</p >
+                <p class="location">📍 桔子岛</p >
+            </div>
+            <!-- 照片4 -->
+            <div class="photo-item">
+                <img src="photos/4.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">娃娃：我没得罪你们任何人</p >
+                <p class="location">📍 桔子岛</p >
+            </div>
+            <!-- 照片5 -->
+            <div class="photo-item">
+                <img src="photos/5.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">还是喜欢你佛罗里达这张脸，嘿嘿臭宝</p >
+                <p class="location">📍 佛罗里达</p >
+            </div>
+            <!-- 照片6 -->
+            <div class="photo-item">
+                <img src="photos/6.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">超玩黑哥们钓鱼 也是挺不错的</p >
+                <p class="location">📍 超玩社区</p >
+            </div>
+            <!-- 照片7 -->
+            <div class="photo-item">
+                <img src="photos/7.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">我乖乖 这不得了了 到纽约了！</p >
+                <p class="location">📍 纽约</p >
+            </div>
+            <!-- 照片8 -->
+            <div class="photo-item">
+                <img src="photos/8.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">拍完照还得回洛圣都喂猪</p >
+                <p class="location">📍 纽约</p >
+            </div>
+            <!-- 照片9 -->
+            <div class="photo-item">
+                <img src="photos/9.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">七日照样带你 小妞</p >
+                <p class="location">📍 七日世界</p >
+            </div>
+            <!-- 照片10 -->
+            <div class="photo-item">
+                <img src="photos/10.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">重返桔子岛 结果倒闭了</p >
+                <p class="location">📍 桔子岛</p >
+            </div>
+            <!-- 照片11 -->
+            <div class="photo-item">
+                <img src="photos/11.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">天气刚开服 这姿势不错 我看的多嘿嘿</p >
+                <p class="location">📍 天气的服</p >
+            </div>
+            <!-- 照片12 -->
+            <div class="photo-item">
+                <img src="photos/12.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">不是你这姿势？抠鼻屎呐！</p >
+                <p class="location">📍 天气的服</p >
+            </div>
+            <!-- 照片13 -->
+            <div class="photo-item">
+                <img src="photos/13.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">还是我比较帅 嘿嘿</p >
+                <p class="location">📍 天气的服</p >
+            </div>
+            <!-- 照片14 -->
+            <div class="photo-item">
+                <img src="photos/14.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">这张最有氛围了！《猫咖的爱情》</p >
+                <p class="location">📍 天气的服</p >
+            </div>
+            <!-- 照片15 -->
+            <div class="photo-item">
+                <img src="photos/15.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">我允许你比我帅了吗 小心我揍你哦！</p >
+                <p class="location">📍 Yn life</p >
+            </div>
+            <!-- 照片16 -->
+            <div class="photo-item">
+                <img src="photos/16.jpg?v=1" alt="" onclick="openLightbox(this.src)">
+                <p class="caption">来 咂个嘴臭宝</p >
+                <p class="location">📍 天气的服</p >
+            </div>
         </div>
 
-        <!-- 底部 -->
         <div class="bottom-note">
             <p>属于陈东洋和点点的小世界 ❤️</p >
         </div>
     </div>
 
+    <!-- 音乐播放逻辑 -->
+    <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+
     <script>
-        // ===== 灯箱功能 =====
+        // 灯箱
         var lightbox = document.getElementById("lightbox");
         var lightboxImg = document.getElementById("lightboxImg");
         var closeBtn = document.getElementById("closeLightbox");
@@ -179,34 +368,22 @@
             lightboxImg.src = src;
             lightbox.classList.add("active");
         }
-
         function closeLightbox() {
             lightbox.classList.remove("active");
         }
-
-        // 点关闭按钮
         closeBtn.addEventListener("click", closeLightbox);
-
-        // 点背景关闭
         lightbox.addEventListener("click", function(e) {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
+            if (e.target === lightbox) closeLightbox();
         });
-
-        // 按 Esc 关闭
         document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape" && lightbox.classList.contains("active")) {
-                closeLightbox();
-            }
+            if (e.key === "Escape" && lightbox.classList.contains("active")) closeLightbox();
         });
 
-        // ===== 飘落爱心 =====
+        // 飘落爱心
         var canvas = document.getElementById("heartsCanvas");
         var ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         var hearts = [];
         for (var i = 0; i < 30; i++) {
             hearts.push({
@@ -218,7 +395,6 @@
                 drift: Math.random() * 0.3 - 0.15
             });
         }
-
         function drawHearts() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (var i = 0; i < hearts.length; i++) {
@@ -235,10 +411,56 @@
             requestAnimationFrame(drawHearts);
         }
         drawHearts();
-
         window.addEventListener("resize", function() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+
+        // 音乐播放器控制
+        var audio = document.getElementById("bgm");
+        var playBtn = document.getElementById("playBtn");
+        var progressBar = document.getElementById("progressBar");
+        var progressFill = document.getElementById("progressFill");
+        var musicTime = document.getElementById("musicTime");
+
+        playBtn.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = "⏸️";
+            } else {
+                audio.pause();
+                playBtn.textContent = "▶️";
+            }
+        });
+
+        audio.addEventListener("timeupdate", function() {
+            var percent = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = percent + "%";
+
+            var mins = Math.floor(audio.currentTime / 60);
+            var secs = Math.floor(audio.currentTime % 60);
+            musicTime.textContent = mins + ":" + (secs < 10 ? "0" : "") + secs;
+        });
+
+        progressBar.addEventListener("click", function(e) {
+            var rect = progressBar.getBoundingClientRect();
+            var clickX = e.clientX - rect.left;
+            var width = rect.width;
+            var seekTime = (clickX / width) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        // 自动播放尝试（部分浏览器可能限制，用户需手动点一下页面任意位置后播放）
+        window.addEventListener("load", function() {
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(function() {
+                    playBtn.textContent = "⏸️";
+                }).catch(function() {
+                    // 自动播放被阻止，显示播放按钮
+                    playBtn.textContent = "▶️";
+                });
+            }
         });
     </script>
 </body>
