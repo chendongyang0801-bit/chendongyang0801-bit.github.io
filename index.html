@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ 陈东洋和点点的小窝</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #fef3e0;
+            overflow-x: hidden;
+        }
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; z-index: 99;
+            padding: 16px 24px;
+            font-size: 18px;
+            color: #d47a6b;
+            font-weight: bold;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 0 0 20px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            letter-spacing: 2px;
+        }
+        .top-icon { font-size: 20px; margin-right: 5px; }
+        .story { position: relative; z-index: 2; padding-top: 70px; padding-bottom: 40px; }
+        .main-title { text-align: center; padding: 30px 20px 10px; }
+        .main-title h1 { font-size: 38px; color: #d47a6b; }
+        .main-title .sub { font-size: 14px; color: #bbb; letter-spacing: 3px; margin-top: 5px; }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .photo-item { text-align: center; }
+        .photo-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+        }
+        .photo-item .caption { margin-top: 6px; font-size: 13px; color: #888; }
+        .photo-item .location { font-size: 12px; color: #bbb; }
+        .bottom-note { text-align: center; padding: 40px 20px 30px; }
+        .bottom-note p { font-size: 16px; color: #d47a6b; letter-spacing: 2px; }
+        canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        @media (max-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .top-bar { font-size: 15px; padding: 12px 18px; }
+            .main-title h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span class="top-icon">❤️</span>
+        陈东洋和点点的小窝
+    </div>
+    <canvas id="heartsCanvas"></canvas>
+    <div class="story">
+        <div class="main-title">
+            <h1>📸 我们的照片墙</h1>
+            <p class="sub">· 每一张都是故事 ·</p >
+        </div>
+        <div class="photo-grid">
+            <div class="photo-item">
+                < img src="/chendongyang0801.github.io/photos/1.jpg" alt="">
+                <p class="caption">臭宝记得我第一次给你拍的照片吗？</p >
+                <p class="location">📍 桔子岛</p >
+            </div>
+            <div class="photo-item">
+                < img src="/chendongyang0801.github.io/photos/2.jpg" alt="">
+                <p class="caption">这张也是 个人感觉给你拍最好看的嘿嘿</p >
+                <p class="location">📍 桔子岛</p >
+            </div>
+        </div>
+        <div class="bottom-note">
+            <p>属于陈东洋和点点的小世界 ❤️</p >
+        </div>
+    </div>
+    <script>
+        var canvas = document.getElementById("heartsCanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var hearts = [];
+        for (var i = 0; i < 30; i++) {
+            hearts.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 16 + 6,
+                speed: Math.random() * 0.8 + 0.2,
+                opacity: Math.random() * 0.35 + 0.15,
+                drift: Math.random() * 0.3 - 0.15
+            });
+        }
+        function drawHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < hearts.length; i++) {
+                var h = hearts[i];
+                ctx.font = h.size + "px Arial";
+                ctx.fillStyle = "rgba(220, 130, 140, " + h.opacity + ")";
+                ctx.fillText("❤", h.x, h.y);
+                h.y -= h.speed;
+                h.x += h.drift;
+                if (h.y < -30) { h.y = canvas.height + 30; h.x = Math.random() * canvas.width; }
+                if (h.x > canvas.width + 30) h.x = -30;
+                if (h.x < -30) h.x = canvas.width + 30;
+            }
+            requestAnimationFrame(drawHearts);
+        }
+        drawHearts();
+        window.addEventListener("resize", function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
